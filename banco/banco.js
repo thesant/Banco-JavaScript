@@ -153,8 +153,7 @@ function getSaldo() {
 function getExtrato() {
     const check = verificaConta()
     if(check[1] !== false){
-        const index = contas.findIndex(conta=> conta.numero === check[1])
-        contas.exibirExtrato
+        check[0].exibirExtrato
     }else{
         return null
     }
