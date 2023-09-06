@@ -95,6 +95,7 @@ function excluirConta() {
 }
 
 function verificaConta(){
+    console.log('-----IDENTIFICACAO DE USUARIO-----\n')
     const numConta = parseInt(prompt('Informe o numero da Conta:'))
     const index = contas.findIndex(conta=> conta.numero === numConta)
     if(index !== -1){
@@ -106,13 +107,14 @@ function verificaConta(){
             return dados
     }else{
         console.log('\nConta nao encontrada!!!')
-        return console.log('kk')
+        console.log('\nRefaca a transacao ou cadatre um novo usuario!!!')
+        return false
     }
 }
 
 function getSaque() {
     const check = verificaConta()
-    if(check[1] !== false){
+    if(check !== false){
         const index = contas.findIndex(conta=> conta.numero === check[1])
         const valorSaque = parseInt(prompt("Valor do saque:"));
         contas[index].saldo-=valorSaque
@@ -127,7 +129,7 @@ function getSaque() {
 
 function getDeposito() {
     const check = verificaConta()
-    if(check[1] !== false){
+    if(check !== false){
         const index = contas.findIndex(conta=> conta.numero === check[1])
         const valorDeposito = parseInt(prompt("Valor do deposito:"));
         contas[index].saldo+=valorDeposito
@@ -141,7 +143,7 @@ function getDeposito() {
 
 function getSaldo() {
     const check = verificaConta()
-    if(check[1] !== false){
+    if(check !== false){
         const index = contas.findIndex(conta=> conta.numero === check[1])
         console.log(`\nSaldo total: ${contas[index].saldo}`)
 
@@ -152,7 +154,7 @@ function getSaldo() {
 
 function getExtrato() {
     const check = verificaConta()
-    if(check[1] !== false){
+    if(check !== false){
         check[0].exibirExtrato
     }else{
         return null
@@ -161,22 +163,16 @@ function getExtrato() {
 
 function getTranferencia() {
     const check = verificaConta()
-    console.log(check)
-    if(check[1] !== false){
+    if(check !== false){
         const indexE = contas.findIndex(conta=> conta.numero === check[1]);
         const valorDeposito = parseInt(prompt("Informe o valor:"));
+        console.log('\n----IDENTIFICACAO REMETENTE-------\n')
         const checkTranferencia = verificaConta()
-        if(checkTranferencia[1] !== false){
+        if(checkTranferencia !== false){
             const indexR = contas.findIndex(conta=> conta.numero === checkTranferencia[1])
             contas[indexE].saldo-=valorDeposito //retira do saldo emissor
             contas[indexR].saldo+=valorDeposito //adiciona no saldo remetente
-
-        }else{
-            return null
         }
-
-    }else{
-        return null
     }
 }
 
