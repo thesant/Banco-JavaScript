@@ -170,8 +170,13 @@ function getTranferencia() {
         const checkTranferencia = verificaConta()
         if(checkTranferencia !== false){
             const indexR = contas.findIndex(conta=> conta.numero === checkTranferencia[1])
-            contas[indexE].saldo-=valorDeposito //retira do saldo emissor
-            contas[indexR].saldo+=valorDeposito //adiciona no saldo remetente
+            if (valorDeposito > contas[indexE].saldo) {
+                throw new Error('Saldo insuficiente para o saque.');
+            }else{
+                contas[indexE].saldo-=valorDeposito //retira do saldo emissor
+                contas[indexR].saldo+=valorDeposito //adiciona no saldo remetente
+            }
+            
         }
     }
 }
