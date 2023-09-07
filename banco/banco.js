@@ -99,10 +99,7 @@ function verificaConta(){
     const numConta = parseInt(prompt('Informe o numero da Conta:'))
     const index = contas.findIndex(conta=> conta.numero === numConta)
     if(index !== -1){
-        const contaPessoa = new ContaPoupanca(
-             contas[index].nome, contas[index].numero,
-             contas[index].saldo
-             )
+        const contaPessoa = contas[index]
              const dados = [contaPessoa,numConta]
             return dados
     }else{
@@ -117,12 +114,7 @@ function getSaque() {
     if(check !== false){
         const index = contas.findIndex(conta=> conta.numero === check[1])
         const valorSaque = parseInt(prompt("Valor do saque:"));
-        contas[index].saldo-=valorSaque
-        check[0].saque(valorSaque)
-        
-
-    }else{
-        return null
+        check[0].saque(valorSaque)   
     }
 
 }
@@ -132,12 +124,7 @@ function getDeposito() {
     if(check !== false){
         const index = contas.findIndex(conta=> conta.numero === check[1])
         const valorDeposito = parseInt(prompt("Valor do deposito:"));
-        contas[index].saldo+=valorDeposito
         check[0].deposito(valorDeposito)
-
-
-    }else{
-        return null
     }
 }
 
@@ -147,8 +134,6 @@ function getSaldo() {
         const index = contas.findIndex(conta=> conta.numero === check[1])
         console.log(`\nSaldo total: ${contas[index].saldo}`)
 
-    }else{
-        return null
     }
 }
 
@@ -156,8 +141,6 @@ function getExtrato() {
     const check = verificaConta()
     if(check !== false){
         check[0].exibirExtrato
-    }else{
-        return null
     }
 }
 
